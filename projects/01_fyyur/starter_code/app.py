@@ -30,7 +30,7 @@ migrate = Migrate(app, db)
 #----------------------------------------------------------------------------#
 
 class Venue(db.Model):
-    __tablename__ = 'Venue'
+    __tablename__ = 'venue'
 
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String)
@@ -44,10 +44,14 @@ class Venue(db.Model):
     website_link = db.Column(db.String(120))
     seek_status = db.Column(db.String(140))
 
+    #repr for debugging
+    def __repr__(self):
+        return f'<Venue ID: {self.id}, Name: {self.name}>'
+
     # TODO: implement any missing fields, as a database migration using Flask-Migrate
 
 class Artist(db.Model):
-    __tablename__ = 'Artist'
+    __tablename__ = 'artist'
 
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String)
@@ -59,6 +63,10 @@ class Artist(db.Model):
     facebook_link = db.Column(db.String(120))
     website_link = db.Column(db.String(120))
     seek_status = db.Column(db.String(140))
+
+    #repr for debugging
+    def __repr__(self):
+        return f'<Artist ID: {self.id}, Name: {self.name}>'
 
     # TODO: implement any missing fields, as a database migration using Flask-Migrate
 
