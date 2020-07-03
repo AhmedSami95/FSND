@@ -29,6 +29,12 @@ migrate = Migrate(app, db)
 # Models.
 #----------------------------------------------------------------------------#
 
+shows = db.Table('shows',
+  #db.Column('id', db.Integer, primary_key=True)
+  db.Column('venue_id', db.Integer, db.ForeignKey('venue.id'), primary_key=True),
+  db.Column('artist_id', db.Integer, db.ForeignKey('artist.id'), primary_key=True)
+)
+
 class Venue(db.Model):
     __tablename__ = 'venue'
 
@@ -43,6 +49,7 @@ class Venue(db.Model):
     facebook_link = db.Column(db.String(120))
     website_link = db.Column(db.String(120))
     seek_status = db.Column(db.String(140))
+    artists = db.relationship("Artist", secondary=shows, backref=db.backref('venues', lazy=True))
 
     #repr for debugging
     def __repr__(self):
